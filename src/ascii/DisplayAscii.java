@@ -26,13 +26,13 @@ public abstract class DisplayAscii extends Display<BlockAscii> {
     }
 
     @Override
-    public void clear(BlockAscii point) {
-        this.write(point.getX(), point.getY(), ' ');
+    public void clear(BlockAscii block) {
+        this.write(block.getX(), block.getY(), ' ');
     }
 
     @Override
-    public void draw(BlockAscii point) {
-        this.write(point.getX(), point.getY(), point.getCharacter());
+    public void draw(BlockAscii block) {
+        this.write(block.getX(), block.getY(), block.getCharacter());
     }
 
     @Override

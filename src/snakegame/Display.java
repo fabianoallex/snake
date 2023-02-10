@@ -18,6 +18,6 @@ public abstract class Display<T extends Block> {
     }
 
     public abstract void render();
-    public abstract void draw(T point);
-    public abstract void clear(T point);
+    public abstract void draw(T block);
+    public abstract void clear(T block);
 }
