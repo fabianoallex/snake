@@ -2,7 +2,7 @@ package ascii;
 
 import snakegame.*;
 
-public abstract class SnakeGameAscii extends SnakeGame<PointAscii> {
+public abstract class SnakeGameAscii extends SnakeGame<BlockAscii> {
     protected SnakeGameAscii(Builder builder) {
         super(builder);
     }
@@ -11,7 +11,9 @@ public abstract class SnakeGameAscii extends SnakeGame<PointAscii> {
     protected abstract DisplayAscii createDisplay();
 
     @Override
-    protected abstract AppleAscii createApple();
+    protected AppleAscii createApple() {
+        return new AppleAscii(0, 0);
+    }
 
     @Override
     protected BoardAscii createBoard() {

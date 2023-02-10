@@ -1,7 +1,7 @@
 package snakegame;
 
-public class MovablePointImp extends PointImp implements Movable, Point {
-    public MovablePointImp(int x, int y) {
+public class MovableBlockImp extends BlockImp implements Movable, Block {
+    public MovableBlockImp(int x, int y) {
         super(x, y);
     }
 
@@ -25,7 +25,7 @@ public class MovablePointImp extends PointImp implements Movable, Point {
         this.setY(this.getY()-1);
     }
 
-    public void moveTo(PointImp pointImp) {
+    public void moveTo(BlockImp pointImp) {
         this.setX(pointImp.getX());
         this.setY(pointImp.getY());
     }

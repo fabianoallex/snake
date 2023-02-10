@@ -2,7 +2,7 @@ package ascii;
 
 import snakegame.Apple;
 
-public class AppleAscii extends Apple<PointAscii> implements PointAscii {
+public class AppleAscii extends Apple<BlockAscii> implements BlockAscii {
     public AppleAscii(int x, int y) {
         super(x, y);
     }

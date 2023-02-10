@@ -6,7 +6,7 @@ public class Main {
     public static void main(String[] args) throws IOException, InterruptedException {
         SnakeGameTextArea game = (SnakeGameTextArea) new SnakeGameTextArea.Builder()
                 .withDisplayHeight(20)
-                .withDisplayWidth(100)
+                .withDisplayWidth(50)
                 .build();
 
         JFrame jFrame = new JFrame("Game");
@@ -21,6 +21,5 @@ public class Main {
         jFrame.setVisible(true);
 
         game.run();
-
     }
 }

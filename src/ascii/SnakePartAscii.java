@@ -2,7 +2,7 @@ package ascii;
 
 import snakegame.SnakePart;
 
-public class SnakePartAscii extends SnakePart<PointAscii> implements PointAscii {
+public class SnakePartAscii extends SnakePart<BlockAscii> implements BlockAscii {
     public SnakePartAscii(int x, int y) {
         super(x, y);
     }

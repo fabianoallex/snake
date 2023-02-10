@@ -3,7 +3,7 @@ package snakegame;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class Snake<T extends Point> implements Movable {
+public abstract class Snake<T extends Block> implements Movable {
     private final List<SnakePart<T>> parts;
     private boolean isEating = false;
 
@@ -29,7 +29,7 @@ public abstract class Snake<T extends Point> implements Movable {
         int y = last.getY();
 
         SnakePart<T> newPart = createNewPart();
-        newPart.moveTo(new PointImp(x, y));
+        newPart.moveTo(new BlockImp(x, y));
         getParts().add(newPart);
     }
 
@@ -39,10 +39,10 @@ public abstract class Snake<T extends Point> implements Movable {
             isEating = false;
         }
 
-        PointImp before = this.getHead();
+        BlockImp before = this.getHead();
 
         for (var part: parts) {
-            var temp = new PointImp(part.getX(), part.getY());
+            var temp = new BlockImp(part.getX(), part.getY());
             part.moveTo(before);
             before = temp;
         }

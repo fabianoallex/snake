@@ -1,10 +1,10 @@
 package snakegame;
 
-public class PointImp implements Point {
+public class BlockImp implements Block {
     private int x;
     private int y;
 
-    public PointImp(int x, int y) {
+    public BlockImp(int x, int y) {
         this.x = x;
         this.y = y;
     }
@@ -19,16 +19,18 @@ public class PointImp implements Point {
         return y;
     }
 
+    @Override
     public void setX(int x) {
         this.x = x;
     }
 
+    @Override
     public void setY(int y) {
         this.y = y;
     }
 
     @Override
     public String toString() {
-        return "snakegame.PointImp{" + "x=" + x + ", y=" + y + '}';
+        return "snakegame.BlockImp{" + "x=" + x + ", y=" + y + '}';
     }
 }

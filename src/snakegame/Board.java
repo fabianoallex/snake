@@ -1,6 +1,6 @@
 package snakegame;
 
-public class Board<T extends Point> {
+public class Board<T extends Block> {
     private final Display<T> display;
 
     public Board(Display<T> display) {

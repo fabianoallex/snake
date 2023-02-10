@@ -2,14 +2,18 @@ package snakegame;
 
 import java.util.Random;
 
-public abstract class SnakeGame<T extends Point> {
-    private final int displayHight;
-    private final int displayWidth;
+public abstract class SnakeGame<T extends Block> {
+    public enum Direction {STOPED, UP, RIGHT, DOWN, LEFT};
 
     private final Display<T> display;
     private final Board<T> board;
     private final Snake<T> snake;
     private final Apple<T> apple;
+
+    private final int displayHight;
+    private final int displayWidth;
+    private Direction direction = Direction.STOPED;
+
     protected boolean gameOver = false;
 
     protected SnakeGame(Builder builder) {
@@ -28,6 +32,10 @@ public abstract class SnakeGame<T extends Point> {
     protected abstract Board<T> createBoard();
 
     protected abstract Snake<T> createSneak();
+
+    public void moveSnake(Direction direction) {
+        this.direction = direction;
+    }
 
     public int getDisplayHight() {
         return displayHight;
@@ -67,22 +75,21 @@ public abstract class SnakeGame<T extends Point> {
         while (!gameOver) {
             this.getBoard().clearSnake(this.getSnake());
 
-            if (cont < getDisplayWidth()-1) getSnake().moveRight();
-            else if (cont < getDisplayWidth()+getDisplayHight()-2) getSnake().moveDown();
-            else if (cont < getDisplayWidth()*2+getDisplayHight()-3) getSnake().moveLeft();
-            else if (cont < getDisplayWidth()*2+getDisplayHight()*2-4) getSnake().moveUp();
-            else cont = -1;
+            updateDirectionSnake();
+
+            if (direction.equals(Direction.STOPED))
+                continue;
 
             cont++;
-
-            if (cont % 5 == 0) {
-                getSnake().eat();
-            }
 
             getBoard().drawSnake(getSnake());
 
             if (cont % 10 == 0) {
                 randomAplle();
+            }
+
+            if (cont % 5 == 0) {
+                snake.eat();
             }
 
             getDisplay().render();
@@ -91,6 +98,18 @@ public abstract class SnakeGame<T extends Point> {
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
+        }
+    }
+
+    private void updateDirectionSnake() {
+        if (direction.equals(Direction.UP)) {
+            getSnake().moveUp();
+        } else if (direction.equals(Direction.RIGHT)) {
+            getSnake().moveRight();
+        } else if (direction.equals(Direction.DOWN)) {
+            getSnake().moveDown();
+        } else if (direction.equals(Direction.LEFT)) {
+            getSnake().moveLeft();
         }
     }
 

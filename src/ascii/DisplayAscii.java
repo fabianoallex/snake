@@ -2,7 +2,7 @@ package ascii;
 
 import snakegame.Display;
 
-public abstract class DisplayAscii extends Display<PointAscii> {
+public abstract class DisplayAscii extends Display<BlockAscii> {
     private final Character[][] points;
 
     public Character[][] getPoints() {
@@ -26,12 +26,12 @@ public abstract class DisplayAscii extends Display<PointAscii> {
     }
 
     @Override
-    public void clear(PointAscii point) {
+    public void clear(BlockAscii point) {
         this.write(point.getX(), point.getY(), ' ');
     }
 
     @Override
-    public void draw(PointAscii point) {
+    public void draw(BlockAscii point) {
         this.write(point.getX(), point.getY(), point.getCharacter());
     }
 

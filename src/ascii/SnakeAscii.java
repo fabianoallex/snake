@@ -2,7 +2,7 @@ package ascii;
 
 import snakegame.Snake;
 
-public class SnakeAscii extends Snake<PointAscii> {
+public class SnakeAscii extends Snake<BlockAscii> {
     private SnakeHeadAscii head;
 
     @Override

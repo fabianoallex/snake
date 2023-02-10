@@ -2,7 +2,7 @@ package ascii;
 
 import snakegame.Board;
 
-public class BoardAscii extends Board<PointAscii> {
+public class BoardAscii extends Board<BlockAscii> {
     public BoardAscii(DisplayAscii display) {
         super(display);
     }
