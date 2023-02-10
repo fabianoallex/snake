@@ -5,7 +5,6 @@ import java.util.Random;
 public abstract class SnakeGame<T extends Block> {
     public enum Direction {STOPED, UP, RIGHT, DOWN, LEFT};
 
-    private final Display<T> display;
     private final Board<T> board;
     private final Snake<T> snake;
     private final Apple<T> apple;
@@ -16,20 +15,17 @@ public abstract class SnakeGame<T extends Block> {
 
     protected boolean gameOver = false;
 
-    protected SnakeGame(Builder builder) {
-        this.displayWidth = builder.displayWidth;
-        this.displayHight = builder.displayHeight;
-        this.display = this.createDisplay();
-        this.board = this.createBoard();
+    protected SnakeGame(Builder<T> builder) {
+        this.displayWidth = builder.boardWidth;
+        this.displayHight = builder.boardHeight;
+        this.board = this.createBoard(builder.display);
         this.snake = this.createSneak();
         this.apple = this.createApple();
     }
 
     protected abstract Apple<T> createApple();
 
-    protected abstract Display<T> createDisplay();
-
-    protected abstract Board<T> createBoard();
+    protected abstract Board<T> createBoard(Display<T> display);
 
     protected abstract Snake<T> createSneak();
 
@@ -49,10 +45,6 @@ public abstract class SnakeGame<T extends Block> {
         return board;
     }
 
-    public Display<T> getDisplay() {
-        return display;
-    }
-
     public Snake<T> getSnake() {
         return snake;
     }
@@ -61,6 +53,7 @@ public abstract class SnakeGame<T extends Block> {
         getBoard().clear((T) apple);
 
         Random random = new Random();
+
         int x = random.nextInt(this.displayWidth);
         int y = random.nextInt(this.displayHight);
 
@@ -74,7 +67,6 @@ public abstract class SnakeGame<T extends Block> {
         int cont = 0;
         while (!gameOver) {
             this.getBoard().clearSnake(this.getSnake());
-
             updateDirectionSnake();
 
             if (direction.equals(Direction.STOPED))
@@ -92,7 +84,7 @@ public abstract class SnakeGame<T extends Block> {
                 snake.eat();
             }
 
-            getDisplay().render();
+            getBoard().render();
             try {
                 Thread.sleep(100);
             } catch (InterruptedException e) {
@@ -113,21 +105,26 @@ public abstract class SnakeGame<T extends Block> {
         }
     }
 
-    public abstract static class Builder {
-        protected int displayWidth = 10;
-        protected int displayHeight = 10;
+    public abstract static class Builder<T extends Block> {
+        protected int boardWidth = 10;
+        protected int boardHeight = 10;
+        protected Display<T> display;
 
-        public Builder withDisplayWidth(int displayWidth) {
-            this.displayWidth = displayWidth;
+        public Builder(Display<T> display) {
+            this.display = display;
+        }
+
+        public Builder<T> withBoardWidth(int boardWidth) {
+            this.boardWidth = boardWidth;
             return this;
         }
 
-        public Builder withDisplayHeight(int displayHeight) {
-            this.displayHeight = displayHeight;
+        public Builder<T> withBoardHeight(int boardHeight) {
+            this.boardHeight = boardHeight;
             return this;
         }
 
-        public abstract Builder getThis();
-        public abstract SnakeGame<?> build();
+        public abstract Builder<T> getThis();
+        public abstract SnakeGame<T> build();
     }
 }

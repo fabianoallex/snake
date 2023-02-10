@@ -2,9 +2,17 @@ package snakegame;
 
 public class Board<T extends Block> {
     private final Display<T> display;
+    private final int leftCornerX;
+    private final int leftCornerY;
+
+    public Board(Display<T> display, int leftCornerX, int leftCornerY) {
+        this.display = display;
+        this.leftCornerX = leftCornerX;
+        this.leftCornerY = leftCornerY;
+    }
 
     public Board(Display<T> display) {
-        this.display = display;
+        this(display, 0, 0);
     }
 
     public void clearSnake(Snake<T> snake) {
@@ -25,5 +33,13 @@ public class Board<T extends Block> {
 
     public void clear(T block) {
         display.clear(block);
+    }
+
+    public void render() {
+        this.display.render();
+    }
+
+    public Display<T> getDisplay() {
+        return display;
     }
 }

@@ -1,6 +1,6 @@
 package snakegameswing;
 
-import ascii.DisplayAscii;
+import snakegameascii.DisplayAscii;
 import javax.swing.*;
 import java.awt.*;
 

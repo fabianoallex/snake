@@ -1,18 +1,22 @@
+import snakegameswing.DisplayTextArea;
 import snakegameswing.SnakeGameTextArea;
 import javax.swing.*;
 import java.io.IOException;
 
 public class Main {
     public static void main(String[] args) throws IOException, InterruptedException {
-        SnakeGameTextArea game = (SnakeGameTextArea) new SnakeGameTextArea.Builder()
-                .withDisplayHeight(20)
-                .withDisplayWidth(50)
+
+        DisplayTextArea displayTextArea = new DisplayTextArea(20, 50);
+
+        SnakeGameTextArea game = (SnakeGameTextArea) new SnakeGameTextArea.Builder(displayTextArea)
+                .withBoardHeight(20)
+                .withBoardWidth(50)
                 .build();
 
         JFrame jFrame = new JFrame("Game");
         jFrame.setSize(600,600);
 
-        JTextArea textArea = game.getDisplay().getTextArea();
+        JTextArea textArea = displayTextArea.getTextArea();
 
         JPanel jPanel = new JPanel();
         jPanel.add(textArea);

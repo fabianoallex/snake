@@ -1,4 +1,4 @@
-package ascii;
+package snakegameascii;
 
 import snakegame.Display;
 

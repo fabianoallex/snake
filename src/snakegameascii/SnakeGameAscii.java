@@ -1,14 +1,11 @@
-package ascii;
+package snakegameascii;
 
 import snakegame.*;
 
 public abstract class SnakeGameAscii extends SnakeGame<BlockAscii> {
-    protected SnakeGameAscii(Builder builder) {
+    protected SnakeGameAscii(Builder<BlockAscii> builder) {
         super(builder);
     }
-
-    @Override
-    protected abstract DisplayAscii createDisplay();
 
     @Override
     protected AppleAscii createApple() {
@@ -16,8 +13,8 @@ public abstract class SnakeGameAscii extends SnakeGame<BlockAscii> {
     }
 
     @Override
-    protected BoardAscii createBoard() {
-        return new BoardAscii((DisplayAscii) this.getDisplay());
+    protected BoardAscii createBoard(Display<BlockAscii> display) {
+        return new BoardAscii((DisplayAscii) display);
     }
 
     @Override

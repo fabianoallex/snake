@@ -1,6 +1,7 @@
 package snakegameswing;
 
-import ascii.SnakeGameAscii;
+import snakegameascii.BlockAscii;
+import snakegameascii.SnakeGameAscii;
 import snakegame.SnakeGame;
 import javax.swing.*;
 import java.awt.event.KeyEvent;
@@ -9,21 +10,12 @@ import java.awt.event.KeyListener;
 public class SnakeGameTextArea extends SnakeGameAscii {
     protected SnakeGameTextArea(Builder builder) {
         super(builder);
-    }
-
-    @Override
-    protected DisplayTextArea createDisplay() {
-        var display = new DisplayTextArea(this.getDisplayHight(), getDisplayWidth());
-        configEventsOfTextArea(display.getTextArea());
-        return display;
+        configEventsOfTextArea(builder.getDisplay().getTextArea());
     }
 
     private void configEventsOfTextArea(JTextArea textArea) {
         textArea.addKeyListener(new KeyListener() {
-            @Override
-            public void keyTyped(KeyEvent e) {
-
-            }
+            @Override public void keyTyped(KeyEvent e) {}
 
             @Override
             public void keyPressed(KeyEvent e) {
@@ -38,19 +30,15 @@ public class SnakeGameTextArea extends SnakeGameAscii {
                 e.consume();
             }
 
-            @Override
-            public void keyReleased(KeyEvent e) {
-
-            }
+            @Override public void keyReleased(KeyEvent e) {}
         });
     }
 
-    @Override
-    public DisplayTextArea getDisplay() {
-        return (DisplayTextArea) super.getDisplay();
-    }
+    public static class Builder extends SnakeGame.Builder<BlockAscii> {
+        public Builder(DisplayTextArea display) {
+            super(display);
+        }
 
-    public static class Builder extends SnakeGame.Builder {
         @Override
         public Builder getThis() {
             return this;
@@ -59,6 +47,10 @@ public class SnakeGameTextArea extends SnakeGameAscii {
         @Override
         public SnakeGameTextArea build() {
             return new SnakeGameTextArea(this);
+        }
+
+        public DisplayTextArea getDisplay() {
+            return (DisplayTextArea) this.display;
         }
     }
 }
