@@ -3,15 +3,15 @@ package ascii;
 import snakegame.Display;
 
 public abstract class DisplayAscii extends Display<BlockAscii> {
-    private final Character[][] points;
+    private final Character[][] blocks;
 
-    public Character[][] getPoints() {
-        return points;
+    public Character[][] getBlocks() {
+        return blocks;
     }
 
     public DisplayAscii(int height, int width) {
         super(height, width);
-        points = new Character[height][width];
+        blocks = new Character[height][width];
         this.clear();
     }
 
@@ -22,7 +22,7 @@ public abstract class DisplayAscii extends Display<BlockAscii> {
     }
 
     private void write(int x, int y, Character value) {
-        points[y][x] = value;
+        blocks[y][x] = value;
     }
 
     @Override

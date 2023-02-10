@@ -24,7 +24,7 @@ public class DisplayTextArea extends DisplayAscii {
 
         for (int i = 0; i < this.getHeight(); i++) {
             for (int j = 0; j < this.getWidth(); j++)
-                result.append(this.getPoints()[i][j]);
+                result.append(this.getBlocks()[i][j]);
 
             result.append("\n");
         }

@@ -19,11 +19,11 @@ public class Board<T extends Block> {
         });
     }
 
-    public void draw(T point) {
-        display.draw(point);
+    public void draw(T block) {
+        display.draw(block);
     }
 
-    public void clear(T point) {
-        display.clear(point);
+    public void clear(T block) {
+        display.clear(block);
     }
 }
