@@ -9,8 +9,10 @@ public class Main {
         DisplayTextArea displayTextArea = new DisplayTextArea(20, 50);
 
         SnakeGameTextArea game = (SnakeGameTextArea) new SnakeGameTextArea.Builder(displayTextArea)
-                .withBoardHeight(20)
-                .withBoardWidth(50)
+                .withBoardHeight(5)
+                .withBoardWidth(5)
+                .withTopLeftCornerBoardX(10)
+                .withTopLeftCornerBoardY(10)
                 .build();
 
         JFrame jFrame = new JFrame("Game");

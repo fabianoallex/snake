@@ -2,17 +2,49 @@ package snakegame;
 
 public class Board<T extends Block> {
     private final Display<T> display;
-    private final int leftCornerX;
-    private final int leftCornerY;
-
-    public Board(Display<T> display, int leftCornerX, int leftCornerY) {
-        this.display = display;
-        this.leftCornerX = leftCornerX;
-        this.leftCornerY = leftCornerY;
-    }
+    private int topLeftCornerX;
+    private int topLeftCornerY;
+    private int height;
+    private int width;
 
     public Board(Display<T> display) {
-        this(display, 0, 0);
+        this.display = display;
+        this.topLeftCornerX = 0;
+        this.topLeftCornerY = 0;
+        this.height = display.getHeight();
+        this.width = display.getWidth();
+    }
+
+    public void setTopLeftCornerX(int topLeftCornerX) {
+        this.topLeftCornerX = topLeftCornerX;
+    }
+
+    public void setTopLeftCornerY(int topLeftCornerY) {
+        this.topLeftCornerY = topLeftCornerY;
+    }
+
+    public void setHeight(int height) {
+        this.height = height;
+    }
+
+    public void setWidth(int width) {
+        this.width = width;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
+    public int getWidth() {
+        return width;
+    }
+
+    public int getTopLeftCornerX() {
+        return topLeftCornerX;
+    }
+
+    public int getTopLeftCornerY() {
+        return topLeftCornerY;
     }
 
     public void clearSnake(Snake<T> snake) {

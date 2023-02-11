@@ -9,16 +9,16 @@ public abstract class SnakeGame<T extends Block> {
     private final Snake<T> snake;
     private final Apple<T> apple;
 
-    private final int displayHight;
-    private final int displayWidth;
     private Direction direction = Direction.STOPED;
 
     protected boolean gameOver = false;
 
     protected SnakeGame(Builder<T> builder) {
-        this.displayWidth = builder.boardWidth;
-        this.displayHight = builder.boardHeight;
         this.board = this.createBoard(builder.display);
+        this.board.setTopLeftCornerX(builder.topLeftCornerBoardX);
+        this.board.setTopLeftCornerY(builder.topLeftCornerBoardY);
+        this.board.setWidth(builder.boardWidth);
+        this.board.setHeight(builder.boardHeight);
         this.snake = this.createSneak();
         this.apple = this.createApple();
     }
@@ -31,14 +31,6 @@ public abstract class SnakeGame<T extends Block> {
 
     public void moveSnake(Direction direction) {
         this.direction = direction;
-    }
-
-    public int getDisplayHight() {
-        return displayHight;
-    }
-
-    public int getDisplayWidth() {
-        return displayWidth;
     }
 
     public Board<T> getBoard() {
@@ -54,11 +46,11 @@ public abstract class SnakeGame<T extends Block> {
 
         Random random = new Random();
 
-        int x = random.nextInt(this.displayWidth);
-        int y = random.nextInt(this.displayHight);
+        int x = random.nextInt(this.board.getWidth());
+        int y = random.nextInt(this.board.getHeight());
 
-        apple.setX(x);
-        apple.setY(y);
+        apple.setX(x + board.getTopLeftCornerX());
+        apple.setY(y + board.getTopLeftCornerY());
 
         getBoard().draw((T) apple);
     }
@@ -108,20 +100,32 @@ public abstract class SnakeGame<T extends Block> {
     public abstract static class Builder<T extends Block> {
         protected int boardWidth = 10;
         protected int boardHeight = 10;
+        private int topLeftCornerBoardX = 0;
+        private int topLeftCornerBoardY = 0;
         protected Display<T> display;
 
         public Builder(Display<T> display) {
             this.display = display;
         }
 
+        public Builder<T> withTopLeftCornerBoardX(int topLeftCornerBoardX) {
+            this.topLeftCornerBoardX = topLeftCornerBoardX;
+            return getThis();
+        }
+
+        public Builder<T> withTopLeftCornerBoardY(int topLeftCornerBoardY) {
+            this.topLeftCornerBoardY = topLeftCornerBoardY;
+            return getThis();
+        }
+
         public Builder<T> withBoardWidth(int boardWidth) {
             this.boardWidth = boardWidth;
-            return this;
+            return getThis();
         }
 
         public Builder<T> withBoardHeight(int boardHeight) {
             this.boardHeight = boardHeight;
-            return this;
+            return getThis();
         }
 
         public abstract Builder<T> getThis();

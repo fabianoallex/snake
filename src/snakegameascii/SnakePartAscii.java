@@ -9,7 +9,7 @@ public class SnakePartAscii extends SnakePart<BlockAscii> implements BlockAscii 
 
     @Override
     public Character getCharacter() {
-        return '~';
+        return '♦';
     }
 }
 

@@ -9,6 +9,6 @@ public class SnakeHeadAscii extends SnakeHead<BlockAscii> implements BlockAscii 
 
     @Override
     public Character getCharacter() {
-        return '*';
+        return '☺';
     }
 }

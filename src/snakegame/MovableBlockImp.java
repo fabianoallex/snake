@@ -25,7 +25,7 @@ public class MovableBlockImp extends BlockImp implements Movable, Block {
         this.setY(this.getY()-1);
     }
 
-    public void moveTo(BlockImp block) {
+    public void moveTo(Block block) {
         this.setX(block.getX());
         this.setY(block.getY());
     }

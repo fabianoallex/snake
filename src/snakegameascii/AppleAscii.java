@@ -9,6 +9,6 @@ public class AppleAscii extends Apple<BlockAscii> implements BlockAscii {
 
     @Override
     public Character getCharacter() {
-        return 'A';
+        return '☼';
     }
 }
