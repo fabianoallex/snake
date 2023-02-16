@@ -2,7 +2,7 @@ package snakegameascii;
 
 import snakegame.*;
 
-public abstract class SnakeGameAscii extends SnakeGame<BlockAscii> {
+public abstract class SnakeGameAscii<B extends Block<?>, P extends Position<?>> extends SnakeGame<B, P> {
     protected SnakeGameAscii(Builder<BlockAscii> builder) {
         super(builder);
     }

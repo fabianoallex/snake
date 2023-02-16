@@ -1,13 +1,13 @@
 package snakegame;
 
-public class Board<T extends Block> {
-    private final Display<T> display;
+public class Board<B extends Block<?>, P extends Position<?>> {
+    private final Display<B> display;
     private int topLeftCornerX;
     private int topLeftCornerY;
     private int height;
     private int width;
 
-    public Board(Display<T> display) {
+    public Board(Display<B> display) {
         this.display = display;
         this.topLeftCornerX = 0;
         this.topLeftCornerY = 0;
@@ -47,23 +47,23 @@ public class Board<T extends Block> {
         return topLeftCornerY;
     }
 
-    public void clearSnake(Snake<T> snake) {
+    public void clearSnake(Snake<P> snake) {
         snake.getParts().forEach(snakePart -> {
-            display.clear((T) snakePart);
+            display.clear((B) snakePart);
         });
     }
 
-    public void drawSnake(Snake<T> snake) {
+    public void drawSnake(Snake<P> snake) {
         snake.getParts().forEach(snakePart -> {
-            display.draw((T) snakePart);
+            display.draw((B) snakePart);
         });
     }
 
-    public void draw(T block) {
+    public void draw(B block) {
         display.draw(block);
     }
 
-    public void clear(T block) {
+    public void clear(B block) {
         display.clear(block);
     }
 
@@ -71,7 +71,7 @@ public class Board<T extends Block> {
         this.display.render();
     }
 
-    public Display<T> getDisplay() {
+    public Display<B> getDisplay() {
         return display;
     }
 }

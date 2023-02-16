@@ -1,20 +1,26 @@
 package snakegameascii;
 
+import snakegame.Position;
 import snakegame.Snake;
+import snakegame.SnakePart;
 
-public class SnakeAscii extends Snake<BlockAscii> {
-    private SnakeHeadAscii head;
+public class SnakeAscii<T extends Position<?>> extends Snake<T> {
+    private SnakeHeadAscii<T> head;
 
     @Override
-    public SnakePartAscii createNewPart() {
-        return new SnakePartAscii(0, 0);
+    public SnakePartAscii<T> createNewPart(T position) {
+        return new SnakePartAscii<>(position);
     }
 
     @Override
-    public SnakeHeadAscii getHead() {
-        if (head == null)
-            head = new SnakeHeadAscii(0,0);
+    public SnakePart<T> createHead(T position) {
+        this.head = new SnakeHeadAscii<>(position);
+        return this.head;
+    }
 
+
+    @Override
+    public SnakeHeadAscii<T> getHead() {
         return head;
     }
 }

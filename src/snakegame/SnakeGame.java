@@ -2,18 +2,18 @@ package snakegame;
 
 import java.util.Random;
 
-public abstract class SnakeGame<T extends Block> {
+public abstract class SnakeGame<B extends Block<?>, P extends Position<?>> {
     public enum Direction {STOPED, UP, RIGHT, DOWN, LEFT};
 
-    private final Board<T> board;
-    private final Snake<T> snake;
-    private final Apple<T> apple;
+    private final Board<B, P> board;
+    private final Snake<P> snake;
+    private final Apple<P> apple;
 
     private Direction direction = Direction.STOPED;
 
     protected boolean gameOver = false;
 
-    protected SnakeGame(Builder<T> builder) {
+    protected SnakeGame(Builder<B, P> builder) {
         this.board = this.createBoard(builder.display);
         this.board.setTopLeftCornerX(builder.topLeftCornerBoardX);
         this.board.setTopLeftCornerY(builder.topLeftCornerBoardY);
@@ -23,36 +23,26 @@ public abstract class SnakeGame<T extends Block> {
         this.apple = this.createApple();
     }
 
-    protected abstract Apple<T> createApple();
+    protected abstract Apple<P> createApple();
 
-    protected abstract Board<T> createBoard(Display<T> display);
+    protected abstract Board<B, P> createBoard(Display<B> display);
 
-    protected abstract Snake<T> createSneak();
+    protected abstract Snake<P> createSneak();
+
+    protected abstract void randomAplle();
+
+    protected abstract void updateDirectionSnake();
 
     public void moveSnake(Direction direction) {
         this.direction = direction;
     }
 
-    public Board<T> getBoard() {
+    public Board<B, P> getBoard() {
         return board;
     }
 
-    public Snake<T> getSnake() {
+    public Snake<P> getSnake() {
         return snake;
-    }
-
-    private void randomAplle() {
-        getBoard().clear((T) apple);
-
-        Random random = new Random();
-
-        int x = random.nextInt(this.board.getWidth());
-        int y = random.nextInt(this.board.getHeight());
-
-        apple.setX(x + board.getTopLeftCornerX());
-        apple.setY(y + board.getTopLeftCornerY());
-
-        getBoard().draw((T) apple);
     }
 
     public void run() {
@@ -85,50 +75,38 @@ public abstract class SnakeGame<T extends Block> {
         }
     }
 
-    private void updateDirectionSnake() {
-        if (direction.equals(Direction.UP)) {
-            getSnake().moveUp();
-        } else if (direction.equals(Direction.RIGHT)) {
-            getSnake().moveRight();
-        } else if (direction.equals(Direction.DOWN)) {
-            getSnake().moveDown();
-        } else if (direction.equals(Direction.LEFT)) {
-            getSnake().moveLeft();
-        }
-    }
-
-    public abstract static class Builder<T extends Block> {
+    public abstract static class Builder<B extends Block<?>, P extends Position<?>> {
         protected int boardWidth = 10;
         protected int boardHeight = 10;
         private int topLeftCornerBoardX = 0;
         private int topLeftCornerBoardY = 0;
-        protected Display<T> display;
+        protected Display<B> display;
 
-        public Builder(Display<T> display) {
+        public Builder(Display<B> display) {
             this.display = display;
         }
 
-        public Builder<T> withTopLeftCornerBoardX(int topLeftCornerBoardX) {
+        public Builder<B, P> withTopLeftCornerBoardX(int topLeftCornerBoardX) {
             this.topLeftCornerBoardX = topLeftCornerBoardX;
             return getThis();
         }
 
-        public Builder<T> withTopLeftCornerBoardY(int topLeftCornerBoardY) {
+        public Builder<B, P> withTopLeftCornerBoardY(int topLeftCornerBoardY) {
             this.topLeftCornerBoardY = topLeftCornerBoardY;
             return getThis();
         }
 
-        public Builder<T> withBoardWidth(int boardWidth) {
+        public Builder<B, P> withBoardWidth(int boardWidth) {
             this.boardWidth = boardWidth;
             return getThis();
         }
 
-        public Builder<T> withBoardHeight(int boardHeight) {
+        public Builder<B, P> withBoardHeight(int boardHeight) {
             this.boardHeight = boardHeight;
             return getThis();
         }
 
-        public abstract Builder<T> getThis();
-        public abstract SnakeGame<T> build();
+        public abstract Builder<B, P> getThis();
+        public abstract SnakeGame<B, P> build();
     }
 }

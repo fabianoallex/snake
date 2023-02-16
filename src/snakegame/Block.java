@@ -1,11 +1,7 @@
 package snakegame;
 
-public interface Block {
-    int getX();
+public interface Block<T extends Position<?>> {
+    void setPosition(T position);
 
-    int getY();
-
-    void setX(int x);
-
-    void setY(int y);
+    T getPosition();
 }

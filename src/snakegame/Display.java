@@ -1,6 +1,6 @@
 package snakegame;
 
-public abstract class Display<T extends Block> {
+public abstract class Display<T extends Block<?>> {
     private final int height;
     private final int width;
 

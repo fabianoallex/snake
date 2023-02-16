@@ -1,10 +1,11 @@
 package snakegameascii;
 
+import snakegame.Position;
 import snakegame.SnakePart;
 
-public class SnakePartAscii extends SnakePart<BlockAscii> implements BlockAscii {
-    public SnakePartAscii(int x, int y) {
-        super(x, y);
+public class SnakePartAscii<T extends Position<?>> extends SnakePart<T> implements BlockAscii<T> {
+    public SnakePartAscii(T position) {
+        super(position);
     }
 
     @Override

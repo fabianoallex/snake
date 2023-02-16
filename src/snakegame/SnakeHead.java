@@ -1,7 +1,7 @@
 package snakegame;
 
-public class SnakeHead <T extends Block> extends SnakePart<T> {
-    public SnakeHead(int x, int y) {
-        super(x, y);
+public class SnakeHead<T extends Position<?>> extends SnakePart<T> {
+    public SnakeHead(T position) {
+        super(position);
     }
 }
